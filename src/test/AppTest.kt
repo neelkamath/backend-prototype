@@ -16,7 +16,7 @@ class ExplanationTest : StringSpec({
     "An explanation request should beckon an explanation with a response code of 200" {
         withTestApplication(Application::main) {
             with(handleRequest(HttpMethod.Get, "/explanation")) {
-                response.status()!!.value shouldBe 204
+                response.status()!!.value shouldBe 200
                 gson.fromJson(response.content, Explanation::class.java) shouldBe explanation
             }
         }

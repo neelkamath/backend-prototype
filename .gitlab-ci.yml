@@ -1,3 +1,6 @@
+cache:
+  paths: [.gradle/caches]
+
 test-server:
   image: openjdk:8
   script:
