@@ -24,11 +24,8 @@ import org.slf4j.LoggerFactory
 
 data class Explanation(val explanation: String)
 
-private const val database =
-    "mongodb://heroku_j2z4kg55:ll047cm6gqbklksejr9orastv1@ds337418.mlab.com:37418/heroku_j2z4kg55"
-private val db = MongoClients.create("$database?retryWrites=false").getDatabase("heroku_j2z4kg55")
-private const val token =
-    "pk.eyJ1IjoibmVlbGthbWF0aCIsImEiOiJjanp0cHV4cjkwNGVyM21vYXVnYW5oYzU4In0.ioLnaLd2Awv1gMc4kI1FmA"
+private val dbUri: String = System.getenv("MONGODB_URI")
+private val db = MongoClients.create("$dbUri?retryWrites=false").getDatabase(dbUri.split("/").last())
 val explanation = Explanation("Quick reliable backend prototypes")
 /** Shared Gson configuration for the entire project. */
 val gson: Gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()

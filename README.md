@@ -34,17 +34,19 @@ The HTTP API's base URL is https://backend-prototype.herokuapp.com/. You can rea
     1. Create a [GitLab account](https://gitlab.com/users/sign_up).
     1. [Connect](https://docs.gitlab.com/ee/ci/ci_cd_for_external_repos/github_integration.html) the GitHub repo to a GitLab repo.
 1. Set up the deployment.
+    1. If you would like to add metadata such as your logo to the deployment, update [`app.json`](app.json) using this [schema](https://devcenter.heroku.com/articles/app-json-schema).
     1. Create a [Heroku account](https://signup.heroku.com/).
     1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install).
+    1. `heroku login`
     1. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
     1. Set it to [deploy using GitHub](https://devcenter.heroku.com/articles/github-integration#enabling-github-integration).
     1. Perform the following in the **Automatic deploys** section.
         1. Check the **Wait for CI to pass before deploy** checkbox.
         1. Click **Enable Automatic Deploys**.
 1. Set up environment variables.
-    1. Find your DB connection URL in your [config vars](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard).
+    1. Get your MongoDB connection string by running `heroku config:get -a <APP> MONGODB_URI`, where `<APP>` is the name of your Heroku app. Save this for later.
     1. Create a file named `.env`.
-    1. Add the line `MONGODB_URI=<VALUE>` to `.env`. Replace `<VALUE>` with the value of the `MONGODB_URI` config var.
+    1. Add the line `MONGODB_URI=<VALUE>` to `.env`. Replace `<VALUE>` with the value of the `MONGODB_URI` config var you retrieved earlier.
 1. Optionally, generate a server stub for the HTTP API using [OpenAPI Generator](https://openapi-generator.tech/) on the file https://raw.githubusercontent.com/neelkamath/backend-prototype/master/docs/openapi.yaml.
 
 ### [Developing](docs/developing.md)
