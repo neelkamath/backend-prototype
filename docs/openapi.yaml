@@ -1,0 +1,50 @@
+openapi: 3.0.2
+info:
+  title: Backend Prototype
+  version: '0'
+  description: Quick reliable backend prototypes
+  contact:
+    name: Neel Kamath
+    email: neelkamathonline@gmail.com
+    url: https://github.com/neelkamath/backend-prototype
+  license:
+    name: MIT
+    url: https://github.com/neelkamath/backend-prototype/blob/master/LICENSE
+servers:
+  - url: https:/backend-prototype.herokuapp.com/
+    description: The prototype server
+paths:
+  /explanation:
+    get:
+      tags: [explanation]
+      description: Provides an explanation of the project.
+      operationId: explanation
+      responses:
+        '200':
+          $ref: '#/components/responses/Explanation'
+  /health_check:
+    get:
+      tags: [status]
+      description: Checks if all systems are operational.
+      operationId: healthCheck
+      responses:
+        '204':
+          description: All systems are operational.
+components:
+  schemas:
+    Explanation:
+      example:
+        explanation: Quick reliable backend prototypes
+      type: object
+      properties:
+        explanation:
+          type: string
+          description: The value is always `"Quick reliable backend prototypes"`.
+      required: [explanation]
+  responses:
+    Explanation:
+      description: An explanation of the app.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Explanation'

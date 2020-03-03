@@ -1,0 +1,17 @@
+{
+  "name": "Backend Prototype",
+  "description": "Quick reliable backend prototypes",
+  "repository": "https://github.com/neelkamath/backend-prototype",
+  "keywords": [
+    "kotlin",
+    "ktor",
+    "openapi",
+    "gradle",
+    "mongodb",
+    "backend",
+    "template"
+  ],
+  "addons": [
+    "mongolab:sandbox"
+  ]
+}
