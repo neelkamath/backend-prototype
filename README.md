@@ -6,7 +6,7 @@ _Quick reliable backend prototypes_
 
 For backend developers who need to build a prototype, this project is a template that provides boilerplate for the required technologies. Unlike other templates, this project provides the best technologies for prototyping modern applications.
 
-Read the [explanation](docs/explanation.md) on why particular technologies were chosen.
+To know why particular technologies were chosen, read the [explanation](docs/explanation.md).
 
 You might want to create a separate repository to host the specification(s) such as the frontend's wireframes, the application's objectives, the OpenAPI specification, etc. In that case, remove the OpenAPI parts of this repo.
 
