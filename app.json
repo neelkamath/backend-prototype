@@ -13,5 +13,8 @@
   ],
   "addons": [
     "mongolab:sandbox"
-  ]
+  ],
+  "env": {
+    "GRADLE_TASK": "shadowJar"
+  }
 }

@@ -4,24 +4,21 @@
 
 ### Running
 
-```
-heroku local develop
-```
-Runs the server with automatic reload enabled on http://0.0.0.0:80.
+Run the server with automatic reload enabled on http://0.0.0.0:80.
+- Windows: `heroku local develop-win`
+- Others: `heroku local develop`
 
 ### Production
 
-```
-heroku local web
-```
-The server will be running on http://localhost:80.
+Run the server on http://0.0.0.0:80.
+- Windows: `heroku local web-win`
+- Others: `heroku local web`
 
 ### Testing
 
-```
-heroku local test
-```
-Test reports save to `build/reports/tests/test/`.
+Run tests and save the reports to `build/reports/tests/test/`.
+- Windows: `heroku local test-win`
+- Others: `heroku local test`
 
 ## Spec
 

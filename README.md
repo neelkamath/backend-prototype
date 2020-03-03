@@ -2,6 +2,8 @@
 
 _Quick reliable backend prototypes_
 
+![Cover](cover.jpg)
+
 For backend developers who need to build a prototype, this project is a template that provides boilerplate for the required technologies. Unlike other templates, this project provides the best technologies for prototyping modern applications.
 
 Read the [explanation](docs/explanation.md) on why particular technologies were chosen.
@@ -18,7 +20,7 @@ Optionally, generate a client SDK for the HTTP API using [OpenAPI Generator](htt
 
 ## Usage
 
-The HTTP API's base URL is https://backend-prototype.herokuapp.com/. You can read the [documentation](https://neelkamath.gitlab.com/backend-prototype).
+The HTTP API's base URL is https://backend-prototype.herokuapp.com/. You can read the [documentation](https://neelkamath.gitlab.io/backend-prototype/).
 
 ## Contributing
 
@@ -39,6 +41,10 @@ The HTTP API's base URL is https://backend-prototype.herokuapp.com/. You can rea
     1. Perform the following in the **Automatic deploys** section.
         1. Check the **Wait for CI to pass before deploy** checkbox.
         1. Click **Enable Automatic Deploys**.
+1. Set up environment variables.
+    1. Find your DB connection URL in your [config vars](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard).
+    1. Create a file named `.env`.
+    1. Add the line `MONGODB_URI=<VALUE>` to `.env`. Replace `<VALUE>` with the value of the `MONGODB_URI` config var.
 1. Optionally, generate a server stub for the HTTP API using [OpenAPI Generator](https://openapi-generator.tech/) on the file https://raw.githubusercontent.com/neelkamath/backend-prototype/master/docs/openapi.yaml.
 
 ### [Developing](docs/developing.md)

@@ -10,7 +10,7 @@
 
 ## Kotlin
 
-[Kotlin](https://kotlinlang.org/) can seamlessly leverage one of the biggest ecosystems out there, namely the JVM. Its concise syntax, superior IDE support, and excellent tooling leave the complex configuration setups of Java in the past. Clearly, Kotlin isn't just production ready, but is an excellent language choice for building prototypes as well.
+[Kotlin](https://kotlinlang.org/) can seamlessly leverage one of the biggest ecosystems out there, namely the JVM. Its concise syntax, superior IDE support, REPL, and excellent tooling leave the complex configs and setups of Java in the past. Clearly, Kotlin isn't just production ready, but is an excellent language choice for building prototypes as well.
 
 ## Kotest
 
