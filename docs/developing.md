@@ -42,7 +42,5 @@ npx @stoplight/spectral lint docs/openapi.yaml
 
 ### Documentation
 
-- Serve with automatic reload enabled on http://localhost:80: `npx redoc-cli serve docs/openapi.yaml -w`
-- Build a production file saved as `redoc-static.html`: `npx redoc-cli bundle docs/openapi.yaml --title 'Backend Prototype'`
-
-
+- Serve with automatic reload enabled on http://127.0.0.1:8080: `npx redoc-cli serve docs/openapi.yaml -w`
+- Build a production file named `redoc-static.html`: `npx redoc-cli bundle docs/openapi.yaml --title 'Backend Prototype'`

@@ -1,5 +1,8 @@
 test-server:
-  script: ./gradlew test
+  image: openjdk:8
+  script:
+    - curl https://cli-assets.heroku.com/install.sh | sh
+    - heroku local test
   artifacts:
     when: always
     paths: [build/reports/tests/test/]
