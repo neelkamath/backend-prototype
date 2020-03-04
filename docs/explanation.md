@@ -1,5 +1,12 @@
 # Explanation
 
+## ngrok
+
+We use [ngrok](https://ngrok.com/product) to expose the server to the internet so that our fellow developers can consume the service. We will not host the server for the following reasons.
+- The only free hosting service is Heroku, whose free tier runs out of memory unusably quickly. The other free tiered services, such as AWS, only provide a free trial for several months at best.
+- It takes a longer time to deploy because of the slow pipeline. The pipeline is slow because it has to upload to multiple services, each of which has to redownload and recompile every dependency. It's difficult and time-wasting to set up caching for these pipeline components.
+- Applications which are polyglot, or have even slightly unorthodox setups, require an excessive amount of non-standard configuration which isn't acceptible while prototyping.
+
 ## GitHub
 
 [GitHub](https://github.com/) is an excellent platform for prototypes. It version controls your application using [Git](https://git-scm.com/) so that you can revert to what worked in a prior commit. It has a marketplace, free private repositories, enables you to share your project with collaborators and your future self, etc. 
@@ -36,15 +43,13 @@
 
 Although a production application would favor an RDBMS, prototypes simply require runtime objects to be persisted This is not the same thing as a traditional DB. Unlike advanced systems such as Postgres, the occasional corruption of data (which has a negligible chance of occurring during prototyping), and lack of features such as views, functions, and custom datatypes, is a nonissue. Since we're not storing real data (i.e., the DB is insensitive to security defects and data loss), [MongoDB](https://www.mongodb.com/)'s lack of schemas is a pro rather than a con. We can easily dump objects at runtime without having to worry about table creation, DB migrations, etc.
 
-## Heroku
-
-[Heroku](https://www.heroku.com/) provides the following benefits.
- - It includes a generous free tier which allows you to run your application even after the demo is over so that people who see the project years later won't be greeted with a 404. Unlike services like AWS whose free tier expires after a certain duration, Heroku allows you to run any number of apps for free as long as they don't receive traffic 24/7/365.
- - It's easy to use since it's a PaaS.
- - It has support for major technologies such as Python and Docker.
- - It sets up entire environments with the click of a button.
- - It's GUI allows you to rollback deploys in a single click.
-
 ## mLab
 
-Since we're using the Heroku add-on to attach [mLab](https://mlab.com/) to our application, everything is already set up for us (i.e., there is no need for us to create an mLab account, create an mLab DB, or connect mLab to our Heroku application). mLab provides a GUI which allows us to easily wipe the DB, and manually inspect and manipulate entries. Instead of maintaining different database environments (e.g., development, staging), we'll use the hosted instance for all stages (including development). By using mLab's hosted MongoDB databases, we can rid ourselves of concerns such as differing database environments, the inability to quickly manipulate data, and wiping the DB while the schema is being frequently updated.
+We use [mLab](https://www.mlab.com/home) because it automatically sets up a DB. It also provides a GUI so that you can easily manipulate data (e.g., wipe the DB, create an entry).
+
+## Docker
+
+We use [Docker](https://www.docker.com/) because it provides the following benefits.
+- In the dire scenario where another person must run the application, the program can be run with zero setup (with the exception of have Docker installed).
+- It is not unusual for prototypes to turn into polyglots as the required functionality is only available in language-exclusive libraries. For example, a Go NLP library, and a Python Wikipedia library may be used. Althought it pays off in production-ready applications to wrap such libraries in a server, it does not make sense for prototypes to do so. Docker Compose allows us to easily connect any number of technologies with ease.
+- Scripts, such as one to seed the DB, are not only cross-platform, but automated and reproducible as well, which are two very important features while prototyping.

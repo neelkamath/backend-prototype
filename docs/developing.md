@@ -4,21 +4,34 @@
 
 ### Running
 
-Run the server with automatic reload enabled on http://0.0.0.0:80.
-- Windows: `heroku local develop-win`
-- Others: `heroku local develop`
+```
+docker-compose \
+    -f docker/docker-compose.yml \
+    -f docker/docker-compose.dev.yml \
+    --project-directory . \
+    up --build
+```
+Runs the server with automatic reload enabled on http://0.0.0.0:80.
 
 ### Production
 
-Run the server on http://0.0.0.0:80.
-- Windows: `heroku local web-win`
-- Others: `heroku local web`
+```
+docker-compose \
+    -f docker/docker-compose.prod.yml \
+    --project-directory . \
+    up --build 
+```
+Runs the server on http://0.0.0.0:80.
 
 ### Testing
 
-Run tests and save the reports to `build/reports/tests/test/`.
-- Windows: `heroku local test-win`
-- Others: `heroku local test`
+1. Start the container.
+    ```
+    docker-compose -f docker/docker-compose.yml -f docker/docker-compose.test.yml --project-directory . 
+        run --rm prototype sh
+    ```
+1. Test (e.g., `gradle test`) whenever you want. Test reports are saved to `build/reports/tests/test/`.
+1. Run `exit` to shut down the environment.
 
 ## Spec
 
@@ -39,5 +52,5 @@ npx @stoplight/spectral lint docs/openapi.yaml
 
 ### Documentation
 
-- Serve with automatic reload enabled on http://127.0.0.1:8080: `npx redoc-cli serve docs/openapi.yaml -w`
+- Develop by serving and watching on http://127.0.0.1:8080: `npx redoc-cli serve docs/openapi.yaml -w`
 - Build a production file named `redoc-static.html`: `npx redoc-cli bundle docs/openapi.yaml --title 'Backend Prototype'`
