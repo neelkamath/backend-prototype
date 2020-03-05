@@ -13,15 +13,7 @@ docker-compose \
 ```
 Runs the server with automatic reload enabled on http://0.0.0.0:80.
 
-### Production
-
-```
-docker-compose \
-    -f docker/docker-compose.prod.yml \
-    --project-directory . \
-    up --build 
-```
-Runs the server on http://0.0.0.0:80.
+### [Production](production.md)
 
 ### Testing
 
