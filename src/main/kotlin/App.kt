@@ -5,8 +5,8 @@ import ch.qos.logback.classic.LoggerContext
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.mongodb.client.MongoClients
+import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters.eq
-import com.mongodb.client.model.Updates.set
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -21,19 +21,15 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
-import org.bson.Document
 import org.slf4j.LoggerFactory
-
-private data class Name(val name: String)
-
-private data class Names(val names: List<String>)
-
-private data class NameUpdate(val oldName: String, val newName: String)
 
 private val dbUri = System.getenv("MONGODB_URI")
 
 // We set <retryWrites> to <false> because mLab's free tier doesn't support writes being retried.
-private val db = MongoClients.create("$dbUri?retryWrites=false").getDatabase(dbUri.split("/").last())
+val db: MongoDatabase = MongoClients.create("$dbUri?retryWrites=false").getDatabase(dbUri.split("/").last())
+
+/** The only MongoDB collection this project uses. */
+val collection = db.getCollection("names")
 
 /** Shared Gson configuration for the entire project. */
 val gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
@@ -52,34 +48,30 @@ fun Application.main() {
         allowNonSimpleContentTypes = true
     }
     install(Routing) {
-        val collection = db.getCollection("names")
         route("names") {
             delete {
-                val name = call.receive<Name>().name
-                if (collection.find(eq("name", name)).toList().isEmpty())
+                val name = call.receive<Name>()
+                if (collection.find(eq("name", name.name)).toList().isEmpty())
                     call.respond(HttpStatusCode.BadRequest)
                 else {
-                    collection.deleteOne(Document("name", name))
+                    DB.deleteName(name)
                     call.respond(HttpStatusCode.NoContent)
                 }
             }
-            get {
-                val names = collection.find().toList().map { it.getString("name") }
-                call.respond(Names(names))
-            }
+            get { call.respond(DB.getNames()) }
             patch {
-                val (oldName, newName) = call.receive<NameUpdate>()
-                if (collection.find(eq("name", oldName)).toList().isEmpty())
+                val update = call.receive<NameUpdate>()
+                if (collection.find(eq("name", update.oldName)).toList().isEmpty())
                     call.respond(HttpStatusCode.BadRequest)
                 else {
-                    collection.findOneAndUpdate(Document("name", oldName), set("name", newName))
+                    DB.updateName(update)
                     call.respond(HttpStatusCode.NoContent)
                 }
             }
             post {
-                val name = call.receive<Name>().name
-                if (collection.find(eq("name", name)).toList().isEmpty()) {
-                    collection.insertOne(Document("name", name))
+                val name = call.receive<Name>()
+                if (collection.find(eq("name", name.name)).toList().isEmpty()) {
+                    DB.insertName(name)
                     call.respond(HttpStatusCode.NoContent)
                 } else
                     call.respond(HttpStatusCode.BadRequest)

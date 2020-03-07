@@ -19,11 +19,11 @@ Runs the server with automatic reload enabled on http://0.0.0.0:8000.
 
 1. Start the container.
     ```
-    docker-compose 
-        -f docker/docker-compose.yml 
-        -f docker/docker-compose.test.yml 
-        --project-directory . 
-        run --rm prototype sh
+    docker-compose \
+        -f docker/docker-compose.yml \
+        -f docker/docker-compose.test.yml \
+        --project-directory . \
+        run --rm prototype bash
     ```
 1. Test (e.g., `gradle test`) whenever you want. Test reports are saved to `build/reports/tests/test/`.
 1. Run `exit` to shut down the environment.

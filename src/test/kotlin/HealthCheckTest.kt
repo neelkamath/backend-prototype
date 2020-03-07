@@ -8,7 +8,7 @@ import io.ktor.http.HttpMethod
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.withTestApplication
 
-// Tests for the `/health_check` endpoint.
+// Tests for the /health_check endpoint.
 class HealthCheckTest : StringSpec({
     "A health check request should beckon a status code of 204" {
         withTestApplication(Application::main) {
