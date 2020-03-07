@@ -26,8 +26,3 @@ tasks {
         manifest { attributes(mapOf("Main-Class" to application.mainClassName)) }
     }
 }
-
-kotlin.sourceSets {
-    getByName("main").kotlin.srcDirs("src/main")
-    getByName("test").kotlin.srcDirs("src/test")
-}

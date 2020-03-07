@@ -2,4 +2,4 @@ version: '3.7'
 services:
   prototype:
     command: sh -c 'gradle --no-daemon -t installDist & gradle --no-daemon run'
-    ports: [80:80]
+    ports: [8000:80]

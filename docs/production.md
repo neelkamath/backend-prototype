@@ -1,10 +1,7 @@
 # Production
 
 ```
-docker-compose \
-    -f docker/docker-compose.prod.yml \
-    --project-directory . \
-    up --build 
+docker-compose -f docker/docker-compose.prod.yml --project-directory . up --build 
 ```
 Runs the server on http://0.0.0.0:80.
 

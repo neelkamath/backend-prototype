@@ -4,7 +4,6 @@ import ch.qos.logback.classic.Level
 import ch.qos.logback.classic.LoggerContext
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.google.gson.annotations.SerializedName
 import com.mongodb.client.MongoClients
 import com.mongodb.client.model.Filters.eq
 import io.ktor.application.Application
@@ -25,15 +24,16 @@ import org.bson.Document
 import org.slf4j.LoggerFactory
 
 private data class Name(val name: String)
+
 private data class Names(val names: List<String>)
-private data class NameUpdate(
-    @SerializedName("old_name") val oldName: String,
-    @SerializedName("new_name") val newName: String
-)
+
+private data class NameUpdate(val oldName: String, val newName: String)
 
 private val dbUri = System.getenv("MONGODB_URI")
+
 // We set <retryWrites> to <false> because mLab's free tier doesn't support writes being retried.
 private val db = MongoClients.create("$dbUri?retryWrites=false").getDatabase(dbUri.split("/").last())
+
 /** Shared Gson configuration for the entire project. */
 val gson = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create()
 
