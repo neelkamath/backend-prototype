@@ -67,7 +67,7 @@ components:
   schemas:
     Name:
       example:
-        name: Neel
+        name: John Doe
       type: object
       properties:
         name:
@@ -76,7 +76,7 @@ components:
       required: [name]
     Names:
       example:
-        names: [Neel, Ashray, Arjun]
+        names: [John, Aga, Bob]
       type: object
       properties:
         names:
@@ -87,7 +87,7 @@ components:
       required: [names]
     NameUpdate:
       example:
-        old_name: Neel
+        old_name: Tony Stark
         new_name: Richard
       properties:
         old_name:

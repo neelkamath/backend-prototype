@@ -6,6 +6,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.mongodb.client.MongoClients
 import com.mongodb.client.model.Filters.eq
+import com.mongodb.client.model.Updates.set
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
@@ -71,7 +72,7 @@ fun Application.main() {
                 if (collection.find(eq("name", oldName)).toList().isEmpty())
                     call.respond(HttpStatusCode.BadRequest)
                 else {
-                    collection.findOneAndUpdate(Document("name", oldName), Document("name", newName))
+                    collection.findOneAndUpdate(Document("name", oldName), set("name", newName))
                     call.respond(HttpStatusCode.NoContent)
                 }
             }
